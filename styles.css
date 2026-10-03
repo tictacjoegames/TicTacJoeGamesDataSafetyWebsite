@@ -132,11 +132,4 @@ footer a { color: var(--cream); }
 }
 .badge-success { background: var(--red); color: var(--white); }
 .badge-cancel  { background: var(--sand); color: var(--navy); }
-.status .actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 8px;
-}
 .status ul { text-align: left; display: inline-block; }

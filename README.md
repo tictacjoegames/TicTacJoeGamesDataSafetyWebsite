@@ -1,2 +1,2 @@
 # TicTacJoeGamesDataSafetyWebsite
-This Repo is just to host TicTacJoeGames Data Safety Website
+This is just to host TicTacJoeGames Data Safety Website

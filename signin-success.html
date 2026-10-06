@@ -28,6 +28,9 @@
       <p style="margin: 0 auto;">
         You have successfully signed in with Google. You can close this page and return to the game.
       </p>
+      <p class="actions">
+        <a id="return-to-game" class="pill pill-red" href="tictacjoegames://signin-success">Return to game</a>
+      </p>
     </div>
   </section>
 
@@ -55,5 +58,15 @@
     &copy; Tic Tac Joe Games Pty Ltd &middot;
     <a href="https://www.tictacjoegames.com.au/">tictacjoegames.com.au</a>
   </footer>
+
+  <script>
+    // On Android, use an intent link so Chrome opens the game directly,
+    // falling back to the Play Store listing if it isn't installed.
+    if (/Android/i.test(navigator.userAgent)) {
+      document.getElementById("return-to-game").href =
+        "intent://signin-success#Intent;scheme=tictacjoegames;" +
+        "package=com.TicTacJoeGamesPtyLtm.TicTacJoeGames;end";
+    }
+  </script>
 </body>
 </html>

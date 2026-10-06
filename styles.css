@@ -133,4 +133,4 @@ footer a { color: var(--cream); }
 .badge-success { background: var(--red); color: var(--white); }
 .badge-cancel  { background: var(--sand); color: var(--navy); }
 .status ul { text-align: left; display: inline-block; }
-.status .actions { margin: 24px 0 0; }
+.status .actions { margin: 24px auto 0; max-width: none; text-align: center; }

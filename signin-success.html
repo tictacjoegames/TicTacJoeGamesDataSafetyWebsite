@@ -28,8 +28,8 @@
       <p style="margin: 0 auto;">
         You have successfully signed in with Google. You can close this page and return to the game.
       </p>
-      <p class="actions">
-        <a id="return-to-game" class="pill pill-red" href="tictacjoegames://signin-success">Return to game</a>
+      <p id="return-wrap" class="actions" style="display: none;">
+        <a id="return-to-game" class="pill pill-red" href="#">Return to game</a>
       </p>
     </div>
   </section>
@@ -60,13 +60,23 @@
   </footer>
 
   <script>
-    // On Android, use an intent link so Chrome opens the game directly,
-    // falling back to the Play Store listing if it isn't installed.
-    if (/Android/i.test(navigator.userAgent)) {
-      document.getElementById("return-to-game").href =
-        "intent://signin-success#Intent;scheme=tictacjoegames;" +
-        "package=com.TicTacJoeGamesPtyLtm.TicTacJoeGames;end";
-    }
+    // Android / iOS Google sign-in: Google redirects here with ?code=&state= (or ?error=).
+    // Hand them to the game (it listens for tictacjoegames://oauth?...) so it can finish signing in.
+    (function () {
+      var query = window.location.search;
+      if (!/[?&](code|error)=/.test(query)) return;
+      // intent:// is what Chrome on Android reliably hands to an installed app.
+      var appUrl = /Android/i.test(navigator.userAgent)
+        ? 'intent://oauth' + query +
+          '#Intent;scheme=tictacjoegames;package=com.TicTacJoeGamesPtyLtm.TicTacJoeGames;end'
+        : 'tictacjoegames://oauth' + query;
+
+      // Fallback if the browser doesn't open the game by itself (it may want a tap first).
+      document.getElementById('return-to-game').href = appUrl;
+      document.getElementById('return-wrap').style.display = 'block';
+
+      window.location.replace(appUrl);
+    })();
   </script>
 </body>
 </html>
